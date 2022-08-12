@@ -1,14 +1,13 @@
 import React from "react";
 import './App.css';
 import { Link } from 'react-router-dom';
-import logo from '../src/components/CartPage/cart-asset/cart.svg';
+// import logo from '../src/components/CartPage/cart-asset/cart.svg';
 
-const Nav = () => {
+const Nav = ({ cartScore }) => {
 
     const navStyle = {
         color: 'black',
         textDecoration: 'none'
-
     }
 
     return (
@@ -21,8 +20,8 @@ const Nav = () => {
                 <Link style={navStyle} to='/Shop'>
                     <li>Shop</li>
                 </Link>
-                <Link style={navStyle} to='/Cart'>
-                    <li>{logo}</li>
+                <Link style={navStyle} to='/Cart/'>
+                    <li>Cart {cartScore}</li>
                 </Link>
                 <Link style={navStyle} to='/Contact'>
                     <li>Contact</li>

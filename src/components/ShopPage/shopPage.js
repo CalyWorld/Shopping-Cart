@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './shop-assets/shop.css';
-import { Link } from "react-router-dom";
-const shopPage = () => {
-
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
-  const [items, setItems] = useState([]);
-
-  const fetchItems = async () => {
-    const data = await fetch('https://fakestoreapi.com/products/');
-    const items = await data.json();
-    setItems(items);
-  };
-
+const shopPage = ({ items, handleClick }) => {
+  
   return (
     <div className="item-container">
       {items.map(item => (
         <div className="shopping-item" key={item.id}>
-          <div>
+          <div className="image-container">
             <img src={item.image} alt="" />
           </div>
           <div className="item-identification">
@@ -29,7 +16,7 @@ const shopPage = () => {
             <div>${item.price}</div>
           </div>
           <div className="add-button-container">
-            <Link to={`/Cart/${item.id}`}><button type="button">Add to Cart</button></Link>
+            <button type="button" onClick={() => { handleClick(item) }}>Add to Cart</button>
           </div>
         </div>
       ))}

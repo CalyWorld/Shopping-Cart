@@ -11,7 +11,7 @@ const App = () => {
 
   const [cartScore, setCartScore] = useState(0);
   const [products, setProduct] = useState([]);
-  const [eachProduct, setEachProduct] = useState([]);
+  const [cartProduct, setCartProduct] = useState([]);
 
   useEffect(() => {
     fetchItems();
@@ -23,13 +23,22 @@ const App = () => {
     setProduct(items);
   };
 
-  const handleClick = (id) => {
-    const getEachProduct = products.filter((product) => product.id === id);
-    setEachProduct(getEachProduct);
+  const handleClick = (cartItem) => {
+    // const getEachProduct = products.filter((product) => product.id === id);
+    if(cartProduct.some((item)=> item.id === cartItem.id)){
+    // console.log("duplicated");
+    console.log(cartItem);
+    }
+  
+    //handle click gets each item when clicked;
+    //it checks if the item is already in the array it is going into
+    //if it is, it adds the amount property by 1 and not concat the array
+    //if it is not, it adds the item into the array with an amount property of 1
+
+
+
     setCartScore(cartScore + 1);
   };
-
-
 
 
 
@@ -40,7 +49,7 @@ const App = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='/Home' element={<HomePage />} />
         <Route path='/Shop' element={<ShopPage items={products} handleClick={handleClick} />} />
-        <Route path='/Cart' element={<CartPage eachProduct={eachProduct} />} />
+        <Route path='/Cart' element={<CartPage cartProduct={cartProduct} />} />
         <Route path='/Contact' element={<ContactPage />} />
       </Routes>
     </Router>
