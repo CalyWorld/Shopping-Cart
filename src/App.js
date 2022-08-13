@@ -24,23 +24,22 @@ const App = () => {
   };
 
   const handleClick = (cartItem) => {
-    // const getEachProduct = products.filter((product) => product.id === id);
-    if(cartProduct.some((item)=> item.id === cartItem.id)){
-    // console.log("duplicated");
-    console.log(cartItem);
+    const isDuplicate = (cart) => cart.id === cartItem.id;
+    if (cartProduct.some(isDuplicate) === false) {
+      setCartProduct(cartProduct.concat(cartItem));
+      setCartScore(cartScore + 1);
+    } else if (cartProduct.some(isDuplicate) === true) {
+      return;
     }
-  
-    //handle click gets each item when clicked;
+
+    cartItem['amount'] = 1;
+    //handle click gets each itemObject when clicked;
     //it checks if the item is already in the array it is going into
     //if it is, it adds the amount property by 1 and not concat the array
     //if it is not, it adds the item into the array with an amount property of 1
-
-
-
-    setCartScore(cartScore + 1);
   };
 
-
+  console.log(cartProduct);
 
   return (
     <Router>
