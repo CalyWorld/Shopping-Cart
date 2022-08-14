@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./cart-asset/cart.css";
 
 const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
   let initialValue = 0;
-  let total = cartProduct.reduce(
+  let total = Math.floor(cartProduct.reduce(
     (prev, next) => prev + next.price * next.amount,
     initialValue
-  );
+  ));
   return (
     <div>
       <div className="price-quantity-total-container">
@@ -67,10 +68,14 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
         </div>
       ))}
       <div className="eachItem-submission-container">
-        <div>{total}</div>
+        <div>${total}</div>
         <div className="eachItem-submission">
-          <div>Continue shopping</div>
-          <div>Update Cart</div>
+          <div>
+            <Link to={'/Shop'}><button type="button">Continue Shopping</button></Link>
+          </div>
+          <div>
+            <button type="button">Check Out</button>
+          </div>
         </div>
       </div>
     </div>
