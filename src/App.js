@@ -11,7 +11,6 @@ const App = () => {
   const [cartScore, setCartScore] = useState(0);
   const [products, setProduct] = useState([]);
   const [cartProduct, setCartProduct] = useState([]);
-  const [total, setTotal] = useState(1);
   useEffect(() => {
     fetchItems();
   }, []);
@@ -22,19 +21,39 @@ const App = () => {
     setProduct(items);
   };
 
-  const handleAmount = () => {
-    //gets amount and price of each items and multiplies them together
-  };
-
   const handleChange = (id, num) => {
-    //gets the id of each item and makes sure it's the selected item then it adds the amount or decreases the amount based on the num being passed from the event handler
+    setCartProduct((products) =>
+      products.map((eachProduct) =>
+        eachProduct.id === id && num === -1
+          ? { ...eachProduct, amount: eachProduct.amount - 1 }
+          :
+          eachProduct.id === id && num === 1
+          ? { ...eachProduct, amount: eachProduct.amount + 1 }
+          : 
+          eachProduct.id === id && eachProduct.amount < 1
+          ? []
+          :eachProduct
+      )
+    );
+    return;
+
+    // console.log(cartItem);
+    // console.log(products);
+
+    //gets specific cartItem
+    //if the num is -1, subtract the cart item by -1
+    //if the num is 1, add the cart item amount by 1
   };
 
-  const handleDelete = (id) =>{
-    const nonSelectedCart = cartProduct.filter(cart => cart.id !== id);
+  const handleRemove = (id) =>{
+    return cartProduct.filter((cart)=> cart.id !== id);
+  }
+
+  const handleDelete = (id) => {
+    const nonSelectedCart = cartProduct.filter((cart) => cart.id !== id);
     setCartProduct(nonSelectedCart);
     setCartScore(cartScore - 1);
-  }
+  };
 
   const handleClick = (cartItem) => {
     if (cartProduct.some((product) => product.id === cartItem.id)) {
@@ -68,7 +87,13 @@ const App = () => {
         />
         <Route
           path="/Cart"
-          element={<CartPage cartProduct={cartProduct} total={total} handleDelete={handleDelete} />}
+          element={
+            <CartPage
+              cartProduct={cartProduct}
+              handleDelete={handleDelete}
+              handleChange={handleChange}
+            />
+          }
         />
         <Route path="/Contact" element={<ContactPage />} />
       </Routes>
