@@ -33,6 +33,7 @@ const App = () => {
   const handleDelete = (id) =>{
     const nonSelectedCart = cartProduct.filter(cart => cart.id !== id);
     setCartProduct(nonSelectedCart);
+    setCartScore(cartScore - 1);
   }
 
   const handleClick = (cartItem) => {
