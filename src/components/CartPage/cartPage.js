@@ -1,17 +1,21 @@
 import React from "react";
-import './cart-asset/cart.css';
+import "./cart-asset/cart.css";
 
-const CartPage = ({ cartProduct }) => {
-
+const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
+  let initialValue = 0;
+  let total = cartProduct.reduce(
+    (prev, next) => prev + next.price * next.amount,
+    initialValue
+  );
   return (
     <div>
-      {cartProduct.map(item => (
+      <div className="price-quantity-total-container">
+        <div>Price</div>
+        <div>Quantity</div>
+        <div>Total</div>
+      </div>
+      {cartProduct.map((item) => (
         <div key={item.id} className="cart-container">
-          <div className="price-quantity-total-container">
-            <div>Price</div>
-            <div>Quantity</div>
-            <div>Total</div>
-          </div>
           <div className="eachItem-container">
             <div className="eachItem-container-item1">
               <div>
@@ -21,7 +25,14 @@ const CartPage = ({ cartProduct }) => {
                 <div>{item.category}</div>
                 <div>{item.title}</div>
                 <div>
-                  <button>Remove item</button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleDelete(item.id);
+                    }}
+                  >
+                    Remove item
+                  </button>
                 </div>
               </div>
             </div>
@@ -29,27 +40,41 @@ const CartPage = ({ cartProduct }) => {
               <div>${item.price}</div>
               <div className="quantity-container">
                 <div>
-                  <button type="button">-</button>
+                  <button
+                    onClick={() => {
+                      handleChange(item.id, -1);
+                    }}
+                    type="button"
+                  >
+                    -
+                  </button>
                 </div>
-                <div>1</div>
+                <div>{item.amount}</div>
                 <div>
-                  <button type="button">+</button>
+                  <button
+                    onClick={() => {
+                      handleChange(item.id, 1);
+                    }}
+                    type="button"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
-              <div>$total</div>
-            </div>
-          </div>
-          <div className="eachItem-submission-container">
-            <div>Total Amount</div>
-            <div className="eachItem-submission">
-              <div>Continue shopping</div>
-              <div>Update Cart</div>
+              <div>${item.price * item.amount}</div>
             </div>
           </div>
         </div>
       ))}
+      <div className="eachItem-submission-container">
+        <div>{total}</div>
+        <div className="eachItem-submission">
+          <div>Continue shopping</div>
+          <div>Update Cart</div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default CartPage;
