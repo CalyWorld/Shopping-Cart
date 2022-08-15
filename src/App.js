@@ -22,28 +22,53 @@ const App = () => {
     setProduct(items);
   };
 
-  const handleChange = (id, num) => {
-    //if each cart amount is decremented or incremented, it decreases/add the amount by 1
-    setCartProduct((products) =>
-      products.map((eachProduct) =>
-        eachProduct.id === id && num === -1 
-          ? { ...eachProduct, amount: eachProduct.amount - 1 }
-          : eachProduct.id === id && num === 1
-          ? { ...eachProduct, amount: eachProduct.amount + 1 }
-          // : eachProduct.id === id && eachProduct.amount < 1
-          // ? handleClick(eachProduct)
-          
-          : eachProduct
-      ));
-    return;
+  // const handleChange = (id, num) => {
+  //   //if each cart amount is decremented or incremented, it decreases/add the amount by 1
+  //   setCartProduct((products) =>
+  //     products.map((eachProduct) =>
+  //       eachProduct.id === id && num === -1
+  //         ? { ...eachProduct, amount: eachProduct.amount - 1 }
+  //         : eachProduct.id === id && num === 1
+  //         ? { ...eachProduct, amount: eachProduct.amount + 1 }
+  //         // : eachProduct.id === id && eachProduct.amount < 1
+  //         // ? handleClick(eachProduct)
 
-    //gets specific cartItem
-    //if the num is -1, subtract the cart item by -1
-    //if the num is 1, add the cart item amount by 1
-    // if amount < 1, remove the cart item
+  //         : eachProduct
+  //     ));
+  //   return;
+
+  //   //gets specific cartItem
+  //   //if the num is -1, subtract the cart item by -1
+  //   //if the num is 1, add the cart item amount by 1
+  //   // if amount < 1, remove the cart item
+  // };
+
+  const increment = (cartItem) => {
+    setCartProduct((products) =>
+      products.map((eachCart) =>
+        eachCart.id === cartItem.id
+          ? { ...eachCart, amount: eachCart.amount + 1 }
+          : eachCart
+      )
+    );
+  };
+
+  const decrement = (cartItem) => {
+    if (cartItem.amount < 1) {
+      handleDelete(cartItem.id);
+    } else {
+      setCartProduct((product) =>
+        product.map((eachCart) =>
+          eachCart.id === cartItem.id
+            ? { ...eachCart, amount: eachCart.amount - 1 }
+            : eachCart
+        )
+      );
+    }
   };
 
   console.log(cartProduct);
+
   const handleDelete = (id) => {
     const nonSelectedCart = cartProduct.filter((cart) => cart.id !== id);
     setCartProduct(nonSelectedCart);
@@ -85,7 +110,8 @@ const App = () => {
             <CartPage
               cartProduct={cartProduct}
               handleDelete={handleDelete}
-              handleChange={handleChange}
+              increment={increment}
+              decrement={decrement}
             />
           }
         />
