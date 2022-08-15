@@ -16,32 +16,12 @@ const App = () => {
     fetchItems();
   }, []);
 
+
   const fetchItems = async () => {
     const data = await fetch("https://fakestoreapi.com/products/");
     const items = await data.json();
     setProduct(items);
   };
-
-  // const handleChange = (id, num) => {
-  //   //if each cart amount is decremented or incremented, it decreases/add the amount by 1
-  //   setCartProduct((products) =>
-  //     products.map((eachProduct) =>
-  //       eachProduct.id === id && num === -1
-  //         ? { ...eachProduct, amount: eachProduct.amount - 1 }
-  //         : eachProduct.id === id && num === 1
-  //         ? { ...eachProduct, amount: eachProduct.amount + 1 }
-  //         // : eachProduct.id === id && eachProduct.amount < 1
-  //         // ? handleClick(eachProduct)
-
-  //         : eachProduct
-  //     ));
-  //   return;
-
-  //   //gets specific cartItem
-  //   //if the num is -1, subtract the cart item by -1
-  //   //if the num is 1, add the cart item amount by 1
-  //   // if amount < 1, remove the cart item
-  // };
 
   const increment = (cartItem) => {
     setCartProduct((products) =>
@@ -51,10 +31,11 @@ const App = () => {
           : eachCart
       )
     );
+    return;
   };
 
   const decrement = (cartItem) => {
-    if (cartItem.amount < 1) {
+    if (cartItem.amount === 1) {
       handleDelete(cartItem.id);
     } else {
       setCartProduct((product) =>
@@ -64,6 +45,7 @@ const App = () => {
             : eachCart
         )
       );
+      return;
     }
   };
 
@@ -75,8 +57,10 @@ const App = () => {
     setCartScore(cartScore - 1);
   };
 
+  if(cartProduct.length === 0){
+    console.log("cart empty");
+  }
   const handleClick = (cartItem) => {
-    //if cart has been added before it returns a boolean true and sets each cart amount to +1
     if (cartProduct.some((product) => product.id === cartItem.id)) {
       setCartProduct((products) =>
         products.map((eachProduct) =>
@@ -88,7 +72,6 @@ const App = () => {
       return;
     }
 
-    //increase cart score when item is added into the cart store
     setCartScore(cartScore + 1);
     //add amount property to cartItem object
     setCartProduct((products) => [...products, { ...cartItem, amount: 1 }]);
