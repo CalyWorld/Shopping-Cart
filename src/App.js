@@ -11,6 +11,7 @@ const App = () => {
   const [cartScore, setCartScore] = useState(0);
   const [products, setProduct] = useState([]);
   const [cartProduct, setCartProduct] = useState([]);
+
   useEffect(() => {
     fetchItems();
   }, []);
@@ -22,33 +23,27 @@ const App = () => {
   };
 
   const handleChange = (id, num) => {
+    //if each cart amount is decremented or incremented, it decreases/add the amount by 1
     setCartProduct((products) =>
       products.map((eachProduct) =>
-        eachProduct.id === id && num === -1
+        eachProduct.id === id && num === -1 
           ? { ...eachProduct, amount: eachProduct.amount - 1 }
-          :
-          eachProduct.id === id && num === 1
+          : eachProduct.id === id && num === 1
           ? { ...eachProduct, amount: eachProduct.amount + 1 }
-          : 
-          eachProduct.id === id && eachProduct.amount < 1
-          ? []
-          :eachProduct
-      )
-    );
+          // : eachProduct.id === id && eachProduct.amount < 1
+          // ? handleClick(eachProduct)
+          
+          : eachProduct
+      ));
     return;
-
-    // console.log(cartItem);
-    // console.log(products);
 
     //gets specific cartItem
     //if the num is -1, subtract the cart item by -1
     //if the num is 1, add the cart item amount by 1
+    // if amount < 1, remove the cart item
   };
 
-  const handleRemove = (id) =>{
-    return cartProduct.filter((cart)=> cart.id !== id);
-  }
-
+  console.log(cartProduct);
   const handleDelete = (id) => {
     const nonSelectedCart = cartProduct.filter((cart) => cart.id !== id);
     setCartProduct(nonSelectedCart);
@@ -56,6 +51,7 @@ const App = () => {
   };
 
   const handleClick = (cartItem) => {
+    //if cart has been added before it returns a boolean true and sets each cart amount to +1
     if (cartProduct.some((product) => product.id === cartItem.id)) {
       setCartProduct((products) =>
         products.map((eachProduct) =>
@@ -72,8 +68,6 @@ const App = () => {
     //add amount property to cartItem object
     setCartProduct((products) => [...products, { ...cartItem, amount: 1 }]);
   };
-
-  console.log(cartProduct);
 
   return (
     <Router>

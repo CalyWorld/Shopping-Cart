@@ -4,10 +4,12 @@ import "./cart-asset/cart.css";
 
 const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
   let initialValue = 0;
-  let total = Math.floor(cartProduct.reduce(
-    (prev, next) => prev + next.price * next.amount,
-    initialValue
-  ));
+  let total = Math.floor(
+    cartProduct.reduce(
+      (prev, next) => prev + next.price * next.amount,
+      initialValue
+    )
+  );
   return (
     <div>
       <div className="price-quantity-total-container">
@@ -20,13 +22,13 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
           <div className="eachItem-container">
             <div className="eachItem-container-item1">
               <div>
-                <img src={item.image} alt="" />
+                <img className="cart-image" src={item.image} alt="" />
               </div>
               <div className="eachItem-container-item2">
                 <div>{item.category}</div>
                 <div>{item.title}</div>
                 <div>
-                  <button
+                  <button className="button"
                     type="button"
                     onClick={() => {
                       handleDelete(item.id);
@@ -41,7 +43,7 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
               <div>${item.price}</div>
               <div className="quantity-container">
                 <div>
-                  <button
+                  <button className="button"
                     onClick={() => {
                       handleChange(item.id, -1);
                     }}
@@ -52,7 +54,7 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
                 </div>
                 <div>{item.amount}</div>
                 <div>
-                  <button
+                  <button className="button"
                     onClick={() => {
                       handleChange(item.id, 1);
                     }}
@@ -68,13 +70,15 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
         </div>
       ))}
       <div className="eachItem-submission-container">
-        <div>${total}</div>
+        <div>Total Amount -${total}</div>
         <div className="eachItem-submission">
           <div>
-            <Link to={'/Shop'}><button type="button">Continue Shopping</button></Link>
+            <Link to={"/Shop"}>
+              <button type="button" className="button">Continue Shopping</button>
+            </Link>
           </div>
           <div>
-            <button type="button">Check Out</button>
+            <button type="button" className="button">Check Out</button>
           </div>
         </div>
       </div>
