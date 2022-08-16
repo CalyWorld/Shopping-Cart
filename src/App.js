@@ -16,13 +16,16 @@ const App = () => {
     fetchItems();
   }, []);
 
-
   const fetchItems = async () => {
-    const data = await fetch("https://fakestoreapi.com/products/", {
-      mode: "cors",
-    });
-    const items = await data.json();
-    setProduct(items);
+    try {
+      const data = await fetch("https://fakestoreapi.com/products/", {
+        mode: "cors",
+      });
+      const items = await data.json();
+      setProduct(items);
+    } catch (err) {
+      return <div>Connect to the Internet or try reloading the page</div>;
+    }
   };
 
   const increment = (cartItem) => {
@@ -59,9 +62,6 @@ const App = () => {
     setCartScore(cartScore - 1);
   };
 
-  if(cartProduct.length === 0){
-    console.log("cart empty");
-  }
   const handleClick = (cartItem) => {
     if (cartProduct.some((product) => product.id === cartItem.id)) {
       setCartProduct((products) =>

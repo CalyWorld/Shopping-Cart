@@ -11,7 +11,8 @@ const CartPage = ({ cartProduct, decrement, increment, handleDelete }) => {
     )
   );
 
-  return(
+
+  return (
     <div>
       <div className="price-quantity-total-container">
         <div>Price</div>
@@ -29,7 +30,8 @@ const CartPage = ({ cartProduct, decrement, increment, handleDelete }) => {
                 <div>{item.category}</div>
                 <div>{item.title}</div>
                 <div>
-                  <button className="handle-button"
+                  <button
+                    className="handle-button"
                     type="button"
                     onClick={() => {
                       handleDelete(item.id);
@@ -44,9 +46,10 @@ const CartPage = ({ cartProduct, decrement, increment, handleDelete }) => {
               <div>${item.price}</div>
               <div className="quantity-container">
                 <div>
-                  <button className="handle-button"
+                  <button
+                    className="handle-button"
                     onClick={() => {
-                      decrement(item)
+                      decrement(item);
                     }}
                     type="button"
                   >
@@ -55,9 +58,10 @@ const CartPage = ({ cartProduct, decrement, increment, handleDelete }) => {
                 </div>
                 <div>{item.amount}</div>
                 <div>
-                  <button className="handle-button"
+                  <button
+                    className="handle-button"
                     onClick={() => {
-                      increment(item)
+                      increment(item);
                     }}
                     type="button"
                   >
@@ -75,11 +79,15 @@ const CartPage = ({ cartProduct, decrement, increment, handleDelete }) => {
         <div className="eachItem-submission">
           <div>
             <Link to={"/Shop"}>
-              <button type="button" className="handle-button">Continue Shopping</button>
+              <button type="button" className="handle-button">
+                Continue Shopping
+              </button>
             </Link>
           </div>
           <div>
-            <button type="button" className="handle-button">Check Out</button>
+            <button type="button" className="handle-button">
+              Check Out
+            </button>
           </div>
         </div>
       </div>
