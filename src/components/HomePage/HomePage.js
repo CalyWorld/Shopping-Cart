@@ -5,14 +5,13 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <div className="parent-container">
-          <h1 className="homePage-header">Welcome to Cal's Shop</h1>
         <img
           src="https://picjumbo.com/wp-content/uploads/shopping-carts-in-ikea-store-warehouse-free-photo-2210x1473.jpg"
           alt=""
         />
-        <div className="child-3">
+        <div className="button-container">
           <Link to={"/Shop"}>
-            <button type="button" className="button">
+            <button type="button" className="shop-button">
               Go to Shopping
             </button>
           </Link>

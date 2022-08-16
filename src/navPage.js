@@ -21,7 +21,7 @@ const Nav = ({ cartScore }) => {
   };
   return (
     <nav className="nav">
-      <FaShoppingCart style={iconStyle}/>
+      <ul className="logo-container"><h1 className="app-title">Fake Store</h1><FaShoppingCart style={iconStyle}/></ul>
       <ul className="nav-links">
         <Link style={navStyle} to="/Home">
           <li>Home</li>

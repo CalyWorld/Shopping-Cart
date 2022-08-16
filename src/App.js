@@ -18,7 +18,9 @@ const App = () => {
 
 
   const fetchItems = async () => {
-    const data = await fetch("https://fakestoreapi.com/products/");
+    const data = await fetch("https://fakestoreapi.com/products/", {
+      mode: "cors",
+    });
     const items = await data.json();
     setProduct(items);
   };
@@ -49,7 +51,7 @@ const App = () => {
     }
   };
 
-  console.log(cartProduct);
+  // console.log(cartProduct);
 
   const handleDelete = (id) => {
     const nonSelectedCart = cartProduct.filter((cart) => cart.id !== id);

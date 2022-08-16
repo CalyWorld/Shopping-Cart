@@ -11,11 +11,11 @@ const shopPage = ({ items, handleClick }) => {
           <div className="item-identification">
             <div className="item-title">
               <p>{item.title}</p>
+              <div className="price-container">${item.price}</div>
             </div>
-            <div>${item.price}</div>
           </div>
           <div className="add-button-container">
-            <button className="button"
+            <button className="add-to-cart-button"
               type="button"
               onClick={() => {
                 handleClick(item);

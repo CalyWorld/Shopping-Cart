@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./cart-asset/cart.css";
 
-const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
+const CartPage = ({ cartProduct, decrement, increment, handleDelete }) => {
   let initialValue = 0;
   let total = Math.floor(
     cartProduct.reduce(
@@ -10,7 +10,8 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
       initialValue
     )
   );
-  return (
+
+  return(
     <div>
       <div className="price-quantity-total-container">
         <div>Price</div>
@@ -28,7 +29,7 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
                 <div>{item.category}</div>
                 <div>{item.title}</div>
                 <div>
-                  <button className="button"
+                  <button className="handle-button"
                     type="button"
                     onClick={() => {
                       handleDelete(item.id);
@@ -43,9 +44,9 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
               <div>${item.price}</div>
               <div className="quantity-container">
                 <div>
-                  <button className="button"
+                  <button className="handle-button"
                     onClick={() => {
-                      handleChange(item.id, -1);
+                      decrement(item)
                     }}
                     type="button"
                   >
@@ -54,9 +55,9 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
                 </div>
                 <div>{item.amount}</div>
                 <div>
-                  <button className="button"
+                  <button className="handle-button"
                     onClick={() => {
-                      handleChange(item.id, 1);
+                      increment(item)
                     }}
                     type="button"
                   >
@@ -74,11 +75,11 @@ const CartPage = ({ cartProduct, handleChange, handleDelete }) => {
         <div className="eachItem-submission">
           <div>
             <Link to={"/Shop"}>
-              <button type="button" className="button">Continue Shopping</button>
+              <button type="button" className="handle-button">Continue Shopping</button>
             </Link>
           </div>
           <div>
-            <button type="button" className="button">Check Out</button>
+            <button type="button" className="handle-button">Check Out</button>
           </div>
         </div>
       </div>

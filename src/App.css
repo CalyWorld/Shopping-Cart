@@ -2,14 +2,15 @@
   text-align: center;
 }
 
-.nav{
+.nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
+  background-color: #099db7;
 }
 
-.nav-links{
+.nav-links {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -17,4 +18,25 @@
   gap: 20px;
 }
 
+li {
+  color: #ffffff;
+  font-size: 20px;
+}
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-title {
+  color: #ffffff;
+}
+
+li:hover {
+  -webkit-transition: all 1s 0s ease;
+  -moz-transition: all 1s 0s ease;
+  -o-transition: all 1s 0s ease;
+  transition: all 1s 0s ease;
+  background-color: black;
+}
